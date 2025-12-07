@@ -1,0 +1,56 @@
+__include__: [
+  '../dataset/custom_detection.yml',
+  '../runtime.yml',
+  '../base/dataloader.yml',
+  '../base/optimizer.yml',
+  '../base/skydet.yml',
+]
+
+output_dir: ./outputs/convnext_tiny_dfine
+
+SKYDET:
+  backbone: ConvNeXt
+  encoder: SimpleEncoder
+
+ConvNeXt:
+  in_chans: 3
+  depths: [3, 3, 9, 3]
+  dims: [96, 192, 384, 768]
+  pretrained: dinov3_convnext_tiny_pretrain_lvd1689m-21b726bb.pth
+  return_idx: [1, 2, 3]
+
+SimpleEncoder:
+  in_channels: [192, 384, 768]
+  feat_strides: [8, 16, 32]
+
+DFINETransformer:
+  feat_channels: [192, 384, 768]
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0000125
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+
+  lr: 0.00025
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+
+
+# Increase to search for the optimal ema
+epoches: 80 # 72 + 2n
+train_dataloader:
+  dataset:
+    transforms:
+      policy:
+        epoch: 72
+  collate_fn:
+    stop_epoch: 72
+    ema_restart_decay: 0.9999
+    base_size_repeat: 4
+val_dataloader:
+  total_batch_size: 4

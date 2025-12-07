@@ -1,0 +1,110 @@
+__include__: [  
+  '../dataset/custom_detection.yml',
+  '../runtime.yml',
+  '../base/dataloader.yml',
+  '../base/optimizer.yml',
+]
+
+output_dir: ./outputs/skydet
+
+SKYDET:
+  backbone: ConvNeXt
+  encoder: CrossFusedEncoder
+
+ConvNeXt:
+  in_chans: 3
+  depths: [3, 3, 9, 3]
+  dims: [96, 192, 384, 768]
+  pretrained: dinov3_convnext_tiny_pretrain_lvd1689m-21b726bb.pth
+  return_idx: [0, 1, 2, 3]
+
+CrossFusedEncoder:
+  in_channels: [96, 192, 384, 768]
+  feat_strides: [4, 8, 16, 32]
+  hidden_dim: 256
+  use_encoder_idx: [3]
+  num_encoder_layers: 1
+  nhead: 8
+  dim_feedforward: 1024
+  dropout: 0.0
+  enc_act: gelu
+  expansion: 1.0
+  depth_mult: 1
+  act: silu
+
+
+DFINETransformer:
+  feat_channels: [256, 256, 256, 256]
+  feat_strides: [4, 8, 16, 32]
+  num_levels: 4
+  num_points: 5
+  activation: silu
+  mlp_act: silu
+
+optimizer:
+  type: AdamW
+  params: 
+    - 
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.000025
+    - 
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+
+  lr: 0.0005
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+
+
+# Increase to search for the optimal ema
+epoches: 120 # 72 + 2n
+
+
+lrsheduler: flatcosine
+lr_gamma: 0.5
+warmup_iter: 2000
+flat_epoch: 58    # 4 + epoch // 2, e.g., 40 = 4 + 72 / 2
+no_aug_epoch: 8
+
+train_dataloader: 
+  dataset: 
+    transforms:
+      ops:
+        - {type: Mosaic, output_size: 320, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5],
+           probability: 1.0, fill_value: 0, use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [640, 640], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True, dinov3_norm: True}   
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: [4, 58, 108]   # list 
+        ops: ['Mosaic', 'RandomPhotometricDistort', 'RandomZoomOut', 'RandomIoUCrop']
+      mosaic_prob: 0.5
+
+  collate_fn:
+    mixup_prob: 0.5
+    mixup_epochs: [4, 58]
+    stop_epoch: 108    # epoch in [72, ~) stop `multiscales`
+  total_batch_size: 16
+
+val_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - {type: Resize, size: [640, 640], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True, dinov3_norm: True}   
+  shuffle: False
+  total_batch_size: 4
+  num_workers: 4
+
+
+
+DEIMCriterion:
+  weight_dict: {loss_mal: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 1.5}
+  losses: ['mal', 'boxes', 'local']
+  gamma: 1.5

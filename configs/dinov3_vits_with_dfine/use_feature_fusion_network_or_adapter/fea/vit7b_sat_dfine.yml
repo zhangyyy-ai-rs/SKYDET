@@ -1,0 +1,69 @@
+__include__: [
+  '../dataset/custom_detection.yml',
+  '../runtime.yml',
+  '../base/dataloader.yml',
+  '../base/optimizer.yml',
+  '../base/skydet.yml',
+]
+
+output_dir: ./outputs/vit7b_sat_dfine
+
+SKYDET:
+  backbone: DINOv3SGAs
+
+DINOv3SGAs:
+  name: dinov3_7b
+  weights_path: dinov3_vit7b16_pretrain_sat493m-a6675841.pth
+  interaction_indexes: [5, 8, 11]
+  finetune: False
+  conv_inplane: 32
+  hidden_dim: 256
+
+
+HybridEncoder:
+  in_channels: [256, 256, 256]
+
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0000125
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn)).*$'
+      weight_decay: 0.
+
+  lr: 0.00025
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+
+
+# Increase to search for the optimal ema
+epoches: 80 # 72 + 2n
+train_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [640, 640], }
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: 'float32', scale: True, dinov3_norm: True}   
+        - {type: ConvertBoxes, fmt: 'cxcywh', normalize: True}
+      policy:
+        epoch: 72
+  collate_fn:
+    stop_epoch: 72
+    ema_restart_decay: 0.9999
+    base_size_repeat: 4
+val_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - {type: Resize, size: [640, 640], }
+        - {type: ConvertPILImage, dtype: 'float32', scale: True, dinov3_norm: True}
+  total_batch_size: 4
