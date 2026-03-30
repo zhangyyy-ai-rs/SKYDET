@@ -12,9 +12,6 @@
   <a href="https://github.com/zhangyyy-ai-rs/SKYDET/pulls">
     <img alt="prs" src="https://img.shields.io/github/issues-pr/zhangyyy-ai-rs/SKYDET">
   </a>
-  <a href="https://github.com/zhangyyy-ai-rs/SKYDET">
-    <img alt="stars" src="https://img.shields.io/github/stars/zhangyyy-ai-rs/SKYDET">
-  </a>
 </p>
 
 <p align="center">
