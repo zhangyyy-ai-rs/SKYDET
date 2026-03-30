@@ -15,7 +15,7 @@ SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Mod
 \</p\>
 
 \<p align="center"\>
-[cite_start]SKYDET is a novel end-to-end multi-scale attention-based detection network designed to effectively transfer the general representation capabilities of Vision Foundation Models (VFMs), specifically DINOv3, to remote sensing imagery[cite: 6, 7, 8]. [cite_start]It tackles drastic scale variations, dense small objects, and complex background interference, achieving state-of-the-art (SOTA) performance across multiple challenging benchmarks[cite: 4, 13].
+[cite_start]SKYDET is a novel end-to-end multi-scale attention-based detection network designed to effectively transfer the general representation capabilities of Vision Foundation Models (VFMs), specifically DINOv3, to remote sensing imagery. [cite_start]It tackles drastic scale variations, dense small objects, and complex background interference, achieving state-of-the-art (SOTA) performance across multiple challenging benchmarks[cite: 4, 13].
 \</p\>
 
 -----
@@ -120,15 +120,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 trai
 
 If you use `SKYDET` or its methods in your work, please cite the following BibTeX entries:
 
-```latex
-@article{zhang2025skydet,
-  title={SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images},
-  author={Zhang, Yao and Guo, Wei and Xie, Boxiang and Lin, Lingfeng and Zhang, Jie and Yang, Hongwei and Meng, Yuke and Liu, Yi and Zhang, Wei},
-  journal={arXiv preprint},
-  year={2025}
-}
-```
 
 ## 5\. Acknowledgement
 
-Our work is built upon excellent open-source projects, including [DINOv3](https://www.google.com/search?q=https://github.com/facebookresearch/dinov3), [RT-DETR](https://github.com/lyuwenyu/RT-DETR), and [D-FINE](https://github.com/Peterande/D-FINE). [cite_start]We sincerely thank the authors for their contributions to the community[cite: 15, 35, 146].
+Our work is built upon excellent open-source projects, including [DINOv3](https://www.google.com/search?q=https://github.com/facebookresearch/dinov3), [RT-DETR](https://github.com/lyuwenyu/RT-DETR), and [D-FINE](https://github.com/Peterande/D-FINE). We sincerely thank the authors for their contributions to the community.
