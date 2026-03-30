@@ -1,126 +1,125 @@
-\<h2 align="center"\>
-SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images
-\</h2\>
+<h2 align="center">
+  SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images
+</h2>
 
-\<p align="center"\>
-\<a href="[https://github.com/zhangyyy-ai-rs/SKYDET/blob/main/LICENSE](https://www.google.com/search?q=https://github.com/zhangyyy-ai-rs/SKYDET/blob/main/LICENSE)"\>
-\<img alt="license" src="[https://img.shields.io/badge/LICENSE-Apache%202.0-blue](https://img.shields.io/badge/LICENSE-Apache%202.0-blue)"\>
-\</a\>
-\<a href="[https://github.com/zhangyyy-ai-rs/SKYDET](https://github.com/zhangyyy-ai-rs/SKYDET)"\>
-\<img alt="stars" src="[https://img.shields.io/github/stars/zhangyyy-ai-rs/SKYDET](https://www.google.com/search?q=https://img.shields.io/github/stars/zhangyyy-ai-rs/SKYDET)"\>
-\</a\>
-\<a href="mailto:2020302142023@whu.edu.cn"\>
-\<img alt="Contact Us" src="[https://img.shields.io/badge/Contact-Email-yellow](https://img.shields.io/badge/Contact-Email-yellow)"\>
-\</a\>
-\</p\>
+<p align="center">
+    <a href="https://github.com/zhangyyy-ai-rs/SKYDET/blob/main/LICENSE">
+        <img alt="license" src="https://img.shields.io/badge/LICENSE-Apache%202.0-blue">
+    </a>
+    <a href="https://arxiv.org/abs/XXXX.XXXXX">
+        <img alt="arXiv" src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-red">
+    </a>
+    <a href="https://github.com/zhangyyy-ai-rs/SKYDET">
+        <img alt="GitHub stars" src="https://img.shields.io/github/stars/zhangyyy-ai-rs/SKYDET">
+    </a>
+    <a href="https://github.com/zhangyyy-ai-rs/SKYDET/issues">
+        <img alt="issues" src="https://img.shields.io/github/issues/zhangyyy-ai-rs/SKYDET?color=olive">
+    </a>
+    <a href="https://github.com/zhangyyy-ai-rs/SKYDET/pulls">
+        <img alt="prs" src="https://img.shields.io/github/issues-pr/zhangyyy-ai-rs/SKYDET">
+    </a>
+    <a href="https://your-project-page.github.io/">
+        <img alt="Project Page" src="https://img.shields.io/badge/Webpage-SKYDET-purple">
+    </a>
+</p>
 
-\<p align="center"\>
-[cite_start]SKYDET is a novel end-to-end multi-scale attention-based detection network designed to effectively transfer the general representation capabilities of Vision Foundation Models (VFMs), specifically DINOv3, to remote sensing imagery. [cite_start]It tackles drastic scale variations, dense small objects, and complex background interference, achieving state-of-the-art (SOTA) performance across multiple challenging benchmarks[cite: 4, 13].
-\</p\>
+<p align="center">
+  SKYDET is a novel end-to-end multi-scale attentive detection framework for remote sensing small-object detection.
+  It systematically explores the transferability of <strong>DINOv3</strong> to remote sensing imagery and introduces
+  dedicated modules to enhance multi-scale representation learning and cross-scale feature fusion.
+</p>
 
------
+---
 
-\<div align="center"\>
-Yao Zhang\<sup\>1\</sup\>,
-Wei Guo\<sup\>1\</sup\>,
-Boxiang Xie\<sup\>2\</sup\>,
-Lingfeng Lin\<sup\>3\</sup\>,
-Jie Zhang\<sup\>4\</sup\>,
-Hongwei Yang\<sup\>1\</sup\>,
-Yuke Meng\<sup\>1\</sup\>,
-Yi Liu\<sup\>1\*\</sup\>,
-Wei Zhang\<sup\>5\*\</sup\>
-\</div\>
+<div align="center">
+  Yao Zhang,
+  Wei Guo,
+  Boxiang Xie,
+  Lingfeng Lin,
+  Jie Zhang,
+  Hongwei Yang,
+  Yuke Meng,
+  Yi Liu*,
+  Wei Zhang*
+</div>
 
-\<p align="center"\>
-\<i\>
+<p align="center">
+<i>
+Wuhan University, Northeast Forestry University, Ningde Normal University, KTH Royal Institute of Technology, Harbin Institute of Technology
+</i>
+</p>
 
-1.  Wuhan University \&nbsp; 2. Northeast Forestry University (Aulin College) \&nbsp; 3. Northeast Forestry University (College of Life Science) \&nbsp; 4. Ningde Normal University \&nbsp; 5. KTH Royal Institute of Technology
-    \</i\>
-    \</p\>
-    \<p align="center"\>
-    **📧 Contact:** \<a href="mailto:2020302142023@whu.edu.cn"\>2020302142023@whu.edu.cn\</a\> (Yao Zhang) | \<a href="mailto:yliu@sgg.whu.edu.cn"\>yliu@sgg.whu.edu.cn\</a\> (Yi Liu) | [cite_start]\<a href="mailto:wezhan@kth.se"\>wezhan@kth.se\</a\> (Wei Zhang) [cite: 2, 17, 18, 19, 20, 21, 23, 24]
-    \</p\>
+<p align="center">
+  <strong>Corresponding authors:</strong> Yi Liu and Wei Zhang
+</p>
 
-\<p align="center"\>
-\<strong\>If you find our work helpful, please give us a ⭐\!\</strong\>
-\</p\>
+<p align="center">
+<strong>If you find SKYDET useful, please give this repo a ⭐!</strong>
+</p>
 
-## 🚀 Highlights
+<p align="center">
+  <img src="./figures/teaser.png" alt="teaser" width="90%">
+</p>
 
-  * [cite_start]**VFM for Remote Sensing**: The first to systematically evaluate and introduce DINOv3 into Transformer-based end-to-end remote sensing object detection[cite: 62, 67].
-  * [cite_start]**Semantic-Guided Adapter (SGA)**: Efficiently converts single-scale features from ViT into multi-scale representations, enriching semantic content with fine-grained spatial details[cite: 69].
-  * [cite_start]**Cross Fused Encoder & RGM**: A novel Reciprocal Guidance Module (RGM) enables spatial structure and channel semantics to guide each other, effectively suppressing background noise and sharpening responses to small objects[cite: 11, 12, 70].
-  * [cite_start]**SOTA Performance**: Achieves exceptional accuracy on DOTA-v1.0 (72.6% AP50), AI-TOD (56.1% AP50), and NWPU VHR-10 (95.6% AP50) datasets[cite: 13, 469].
+## 🚀 Updates
+- [x] **[2026.03.30]** Initial release of SKYDET code and README.
+- [ ] Checkpoints and pretrained models will be released soon.
+- [ ] Inference, deployment, and visualization tools will be continuously updated.
 
-## Table of Content
+## Table of Contents
+- [1. Introduction](#1-introduction)
+- [2. Highlights](#2-highlights)
+- [3. Model Zoo](#3-model-zoo)
+- [4. Quick Start](#4-quick-start)
+- [5. Data Preparation](#5-data-preparation)
+- [6. Usage](#6-usage)
+- [7. Tools](#7-tools)
+- [8. Citation](#8-citation)
+- [9. Acknowledgement](#9-acknowledgement)
 
-  * [1. Model Zoo](https://www.google.com/search?q=%231-model-zoo)
-  * [2. Quick Start](https://www.google.com/search?q=%232-quick-start)
-  * [3. Usage](https://www.google.com/search?q=%233-usage)
-  * [4. Citation](https://www.google.com/search?q=%234-citation)
-  * [5. Acknowledgement](https://www.google.com/search?q=%235-acknowledgement)
+## 1. Introduction
 
-## 1\. Model Zoo
+Remote sensing object detection remains highly challenging due to large scale variations, dense small-object distributions, and complex background interference. Existing detectors often rely on supervised pretraining and may suffer from domain gaps when transferred to remote sensing imagery.
 
-[cite_start]We provide two primary variants of SKYDET: **SKYDET-C** (built on a robust ConvNeXt backbone) and **SKYDET-T** (built on the ViT backbone with our Semantic-Guided Adapter)[cite: 10, 334].
+To address this issue, we propose **SKYDET**, a new end-to-end detection framework that leverages the strong representation capability of **vision foundation models (VFMs)** for remote sensing object detection. Specifically, SKYDET systematically evaluates **DINOv3** as a remote sensing backbone and further introduces dedicated modules for multi-scale adaptation and cross-scale fusion.
 
-### Results on DOTA-v1.0 & AI-TOD
+Extensive experiments on **DOTA-v1.0**, **AI-TOD**, and **NWPU VHR-10** demonstrate that SKYDET achieves strong performance, reaching **72.6 AP50**, **51.6 AP50**, and **95.6 AP50**, respectively.
 
-| Model | Backbone | Params (M) | GFLOPs | DOTA-v1.0 AP50 | AI-TOD AP50 | NWPU VHR-10 AP50 | config | checkpoint
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-**SKYDET-C** | DINOv3-ConvNeXt | 20.58 | 237.8 | **72.6** | **56.1** | **95.6** | [yml](https://www.google.com/search?q=./configs/skydet/skydet_c.yml) | [ckpt](https://www.google.com/search?q=%23) |
-**SKYDET-T** | DINOv3-ViT | 805.5 | 458.2 | **70.8** | **54.7** | **94.5** | [yml](https://www.google.com/search?q=./configs/skydet/skydet_t.yml) | [ckpt](https://www.google.com/search?q=%23) |
+## 2. Highlights
 
-[cite_start]*(Note: Data derived from AI-TOD and DOTA-v1.0 evaluation splits[cite: 311, 444, 445, 456, 457, 468, 469, 595, 598]. Checkpoints will be uploaded soon.)*
+- **First systematic exploration of DINOv3 for remote sensing object detection.**
+- **Semantic-Guided Adapter (SGA)** to convert ViT single-scale features into informative multi-scale representations.
+- **Cross Fused Encoder (CFE)** with **Reciprocal Guidance Module (RGM)** for robust cross-scale feature interaction.
+- Two variants:
+  - **SKYDET-T**: DINOv3-ViT based
+  - **SKYDET-C**: DINOv3-ConvNeXt based
+- Strong performance on challenging remote sensing benchmarks.
 
-## 2\. Quick Start
+## 3. Model Zoo
+
+> The following table summarizes the main reported results in the paper.
+> Please replace checkpoint links with your real release links.
+
+### Main Results on AI-TOD and NWPU VHR-10
+
+| Model | Backbone | AI-TOD AP50 | AI-TOD AP50:95 | NWPU VHR-10 AP50 | NWPU VHR-10 AP50:95 | Params | GFLOPs | Config | Checkpoint |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| SKYDET-T | DINOv3-ViT | 54.7 | 27.8 | 94.5 | 71.5 | 805.5M | 458.2G | [yml](./configs/skydet/skydet_t.yml) | [ckpt](#) |
+| SKYDET-C | DINOv3-ConvNeXt | 56.1 | 26.4 | 95.6 | 69.0 | 20.58M | 237.8G | [yml](./configs/skydet/skydet_c.yml) | [ckpt](#) |
+
+### Best Reported AP50 in the Paper
+
+| Dataset | Metric | Performance |
+| :---: | :---: | :---: |
+| DOTA-v1.0 | AP50 | 72.6 |
+| AI-TOD | AP50 | 51.6 |
+| NWPU VHR-10 | AP50 | 95.6 |
+
+## 4. Quick Start
 
 ### Setup
 
 ```shell
-conda create -n skydet python=3.10
+conda create -n skydet python=3.11
 conda activate skydet
-pip install torch==2.1.0 torchvision --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements.txt
-```
-
-### Data Preparation
-
-[cite_start]Organize your datasets (e.g., DOTA-v1.0, AI-TOD, NWPU VHR-10) in COCO format[cite: 300, 301, 305, 313]. Update the dataset paths in your configuration files:
-
-```yaml
-train_dataloader:
-    img_folder: /path/to/DOTA/train/images/
-    ann_file: /path/to/DOTA/annotations/instances_train.json
-val_dataloader:
-    img_folder: /path/to/DOTA/val/images/
-    ann_file: /path/to/DOTA/annotations/instances_val.json
-```
-
-## 3\. Usage
-
-### Training
-
-Train SKYDET-C on 4 GPUs using distributed data parallel (DDP):
-
-```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 train.py -c configs/skydet/skydet_c.yml --use-amp --seed=0
-```
-
-### Testing
-
-Evaluate a trained model checkpoint:
-
-```shell
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 train.py -c configs/skydet/skydet_c.yml --test-only -r /path/to/checkpoint.pth
-```
-
-## 4\. Citation
-
-If you use `SKYDET` or its methods in your work, please cite the following BibTeX entries:
-
-
-## 5\. Acknowledgement
-
-Our work is built upon excellent open-source projects, including [DINOv3](https://www.google.com/search?q=https://github.com/facebookresearch/dinov3), [RT-DETR](https://github.com/lyuwenyu/RT-DETR), and [D-FINE](https://github.com/Peterande/D-FINE). We sincerely thank the authors for their contributions to the community.
