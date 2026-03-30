@@ -28,8 +28,7 @@
 
 ## News
 
-- **[2026.xx.xx]** Initial release of SKYDET code.
-- Checkpoints and project page will be released progressively.
+- **[2026.01]** Initial release of SKYDET code.
 
 ---
 
