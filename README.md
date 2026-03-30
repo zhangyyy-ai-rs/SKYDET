@@ -474,18 +474,7 @@ These configs are useful for ablation studies, backbone transfer experiments, an
 
 ## 12. Citation
 
-If you find this project useful in your research, please cite:
-
-```bibtex
-@misc{zhang2026skydet,
-  title={SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images},
-  author={Yao Zhang and Wei Guo and Boxiang Xie and Lingfeng Lin and Jie Zhang and Hongwei Yang and Yuke Meng and Yi Liu and Wei Zhang},
-  year={2026},
-  note={Please update with the final publication venue, DOI, or arXiv identifier}
-}
-```
-
----
+Full citations will be published after the article is accepted.
 
 ## 13. Acknowledgement
 
