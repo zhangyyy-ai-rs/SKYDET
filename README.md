@@ -1,9 +1,3 @@
-[cite_start]你好！很高兴为你撰写这份 README。SKYDET 将视觉大模型（DINOv3）创新性地应用于遥感图像小目标检测，并在多个数据集上取得了 SOTA 的表现，这项工作非常出色 [cite: 1, 13]！
-
-[cite_start]我参考了 DEIM 的专业排版风格，并结合了你论文中的核心亮点（如 SGA 模块、跨尺度融合编码器 RGM 等）为你定制了以下 `README.md` 模板 [cite: 8, 11, 12]。我已经将你的武汉大学邮箱配置为主要联系方式。你可以直接将以下内容复制到你的 GitHub 仓库中：
-
------
-
 \<h2 align="center"\>
 SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images
 \</h2\>
