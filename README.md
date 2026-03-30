@@ -6,12 +6,6 @@
   <a href="./LICENSE">
     <img alt="license" src="https://img.shields.io/badge/LICENSE-Apache%202.0-blue">
   </a>
-  <a href="https://github.com/zhangyyy-ai-rs/SKYDET/issues">
-    <img alt="issues" src="https://img.shields.io/github/issues/zhangyyy-ai-rs/SKYDET?color=olive">
-  </a>
-  <a href="https://github.com/zhangyyy-ai-rs/SKYDET/pulls">
-    <img alt="prs" src="https://img.shields.io/github/issues-pr/zhangyyy-ai-rs/SKYDET">
-  </a>
 </p>
 
 <p align="center">
