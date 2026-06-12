@@ -15,17 +15,6 @@
 
 ---
 
-## Highlights
-
-- Designed for remote sensing object detection with **dense distributions**, **small targets**, **large scale variations**, and **complex backgrounds**.
-- Supports both **DINOv3-ConvNeXt** and **DINOv3-ViT** explorations.
-- Includes the proposed **Cross Fused Encoder** for enhanced cross-scale interaction.
-- Includes a **Semantic Guiding Adapter (SGA)** for generating multi-scale features from ViT-based backbones.
-- Provides complete training, evaluation, inference, ONNX export, FLOPs computation, and FiftyOne visualization utilities.
-- Supports multiple remote sensing datasets, including **DOTA-v1.0**, **DOTA-v2.0**, **AI-TOD**, **NWPU VHR-10**, **DIOR**, and **custom COCO-format datasets**.
-
----
-
 ## News
 
 - **[2026.01]** Initial release of SKYDET code.
