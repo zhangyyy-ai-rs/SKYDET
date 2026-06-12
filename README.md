@@ -1,5 +1,5 @@
 <h2 align="center">
-  SKYDET: A End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Object in Remote Sensing Images
+  SKYDET: An End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Objects in Remote Sensing Images
 </h2>
 
 <p align="center">
