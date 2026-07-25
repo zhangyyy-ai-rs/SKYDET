@@ -17,6 +17,7 @@
 
 ## News
 
+- **[2026.07]** Our paper has been accepted by TGRS!
 - **[2026.01]** Initial release of SKYDET code.
 
 ---
@@ -453,7 +454,13 @@ These configs are useful for ablation studies, backbone transfer experiments, an
 
 ## 12. Citation
 
-Full citations will be published after the article is accepted.
+@ARTICLE{11623293,
+  author={Zhang, Yao and Guo, Wei and Xie, Boxiang and Lin, Lingfeng and Zhang, Jie and Yang, Hongwei and Meng, Yuke and Liu, Yi and Zhang, Wei},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={SKYDET: An End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Objects in Remote Sensing Images}, 
+  keywords={DETR;Small-target detection;Remote sensing;Vision foundation models},
+  doi={10.1109/TGRS.2026.3716766}}
+
 
 ## 13. Acknowledgement
 
