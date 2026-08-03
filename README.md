@@ -178,7 +178,3 @@ This repository is built upon several excellent open-source projects in the DETR
 for their inspiring work and open-source contributions.
 
 ---
-
-## Contact
-
-If you have any questions, please open an issue in this repository.
