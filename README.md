@@ -22,24 +22,6 @@
 
 ---
 
-## Table of Contents
-
-- [1. Installation](#1-installation)
-- [2. Repository Structure](#2-repository-structure)
-- [3. Data Preparation](#3-data-preparation)
-- [4. Pretrained Weights](#4-pretrained-weights)
-- [5. Training](#5-training)
-- [6. Evaluation](#6-evaluation)
-- [7. Inference](#7-inference)
-- [8. ONNX Export](#8-onnx-export)
-- [9. Benchmark](#9-benchmark)
-- [10. Visualization](#10-visualization)
-- [11. Experimental Configurations](#11-experimental-configurations)
-- [12. Citation](#12-citation)
-- [13. Acknowledgement](#13-acknowledgement)
-
----
-
 ## 1. Installation
 
 ### Environment
@@ -57,34 +39,6 @@ conda create -n skydet python=3.10 -y
 conda activate skydet
 pip install -r requirements.txt
 ```
-
-### Main dependencies
-
-```text
-faster-coco-eval>=1.6.5
-PyYAML
-tensorboard
-scipy
-calflops
-thop
-transformers
-pytorch_wavelets==1.3.0
-timm==1.0.7
-tidecv
-einops
-prettytable
-pycocotools==2.0.8
-```
-
-For deployment and visualization, additional packages may be required:
-
-```bash
-pip install onnx onnxsim
-pip install -r tools/inference/requirements.txt
-pip install -r tools/benchmark/requirements.txt
-pip install fiftyone
-```
-
 ---
 
 ## 2. Repository Structure
@@ -118,19 +72,6 @@ SKYDET/
 ├── requirements.txt
 └── train.py
 ```
-
-### Key files
-
-- `train.py`: main training and evaluation entry.
-- `configs/skydet/skydet_3scale.yml`: SKYDET 3-scale configuration.
-- `configs/skydet/skydet_4scale.yml`: SKYDET 4-scale configuration.
-- `configs/dataset/*.yml`: dataset definitions.
-- `tools/inference/torch_inf.py`: PyTorch inference for images and videos.
-- `tools/deployment/export_onnx.py`: ONNX export.
-- `tools/benchmark/get_info.py`: FLOPs, MACs, and parameter statistics.
-- `tools/visualization/fiftyone_vis.py`: FiftyOne-based visualization.
-
----
 
 ## 3. Data Preparation
 
@@ -352,41 +293,7 @@ python tools/inference/torch_inf_vis.py \
 
 ---
 
-## 8. ONNX Export
 
-### Export model to ONNX
-
-```bash
-python tools/deployment/export_onnx.py \
--c configs/skydet/skydet_3scale.yml \
--r path/to/checkpoint.pth
-```
-
-The export script supports ONNX checking and simplification.
-
-### TensorRT conversion example
-
-```bash
-trtexec --onnx=model.onnx --saveEngine=model.engine --fp16
-```
-
----
-
-## 9. Benchmark
-
-### FLOPs, MACs, and Params
-
-```bash
-python tools/benchmark/get_info.py -c configs/skydet/skydet_3scale.yml
-```
-
-### TensorRT latency benchmark
-
-```bash
-python tools/benchmark/trt_benchmark.py --COCO_dir path/to/COCO2017 --engine_dir model.engine
-```
-
----
 
 ## 10. Visualization
 
