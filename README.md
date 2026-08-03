@@ -84,21 +84,6 @@ This repository provides dataset configs for:
 - DIOR
 - Custom dataset
 
-### Available dataset config files
-
-```text
-configs/dataset/dota1.0_detection.yml
-configs/dataset/dota2.0_detection.yml
-configs/dataset/ai_tod_detection.yml
-configs/dataset/nwpu_detection.yml
-configs/dataset/dior_detection.yml
-configs/dataset/custom_detection.yml
-```
-
-All datasets are expected in **COCO-style detection format**.
-
-### Default custom dataset format
-
 The default custom config uses the following structure:
 
 ```text
@@ -110,53 +95,6 @@ dataset/
     ├── images/ or image files directly under val/
     └── val.json
 ```
-
-The provided custom config currently uses paths like:
-
-```yaml
-img_folder: /data/yourdataset/train
-ann_file: /data/yourdataset/train/train.json
-```
-
-and
-
-```yaml
-img_folder: /data/yourdataset/val
-ann_file: /data/yourdataset/val/val.json
-```
-
-So before training, please edit `configs/dataset/custom_detection.yml` according to your actual dataset location.
-
-### Important fields to modify
-
-```yaml
-num_classes
-train_dataloader.dataset.img_folder
-train_dataloader.dataset.ann_file
-val_dataloader.dataset.img_folder
-val_dataloader.dataset.ann_file
-```
-
-### Important note for SKYDET configs
-
-Both `configs/skydet/skydet_3scale.yml` and `configs/skydet/skydet_4scale.yml` currently include:
-
-```yaml
-'../dataset/custom_detection.yml'
-```
-
-So before training on DOTA, AI-TOD, NWPU, or DIOR, you should either:
-
-1. Replace the dataset include path in the config, or
-2. Copy the config and create your own dataset-specific version.
-
-For example:
-
-```text
-configs/skydet/skydet_3scale_dota1.0.yml
-configs/skydet/skydet_4scale_aitod.yml
-```
-
 ---
 
 ## 4. Pretrained Weights
@@ -197,39 +135,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 \
 train.py -c configs/skydet/skydet_3scale.yml --use-amp --seed 0
 ```
 
-### Train SKYDET-4scale
-
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 \
-train.py -c configs/skydet/skydet_4scale.yml --use-amp --seed 0
-```
-
-### Resume training
-
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 \
-train.py -c configs/skydet/skydet_3scale.yml --use-amp --seed 0 -r path/to/checkpoint.pth
-```
-
-### Fine-tuning from a checkpoint
-
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 \
-train.py -c configs/skydet/skydet_3scale.yml --use-amp --seed 0 -t path/to/checkpoint.pth
-```
-
-### Notes
-
-The SKYDET configs currently use:
-
-- image size: `640 × 640`
-- epochs: `120`
-- optimizer: `AdamW`
-- warmup: `2000` iterations
-- mixed precision: supported via `--use-amp`
-- EMA and DETR-style criterion settings are included in config
-
----
 
 ## 6. Evaluation
 
@@ -250,39 +155,7 @@ train.py -c configs/skydet/skydet_3scale.yml --test-only -r path/to/checkpoint.p
 
 ## 7. Inference
 
-The repository provides PyTorch, ONNXRuntime, OpenVINO, and TensorRT inference scripts.
-
-### PyTorch inference
-
-```bash
-python tools/inference/torch_inf.py \
--c configs/skydet/skydet_3scale.yml \
--r path/to/checkpoint.pth \
--i path/to/image_or_video \
--d cuda:0
-```
-
-For images, the result is saved as:
-
-```text
-torch_results.jpg
-```
-
-For videos, the result is saved as:
-
-```text
-torch_results.mp4
-```
-
-### Other inference backends
-
-```bash
-python tools/inference/onnx_inf.py --onnx model.onnx --input image.jpg
-python tools/inference/openvino_inf.py --xml model.xml --input image.jpg
-python tools/inference/trt_inf.py --trt model.engine --input image.jpg
-```
-
-### Visualized PyTorch inference
+Visualized PyTorch inference
 
 ```bash
 python tools/inference/torch_inf_vis.py \
@@ -293,73 +166,7 @@ python tools/inference/torch_inf_vis.py \
 
 ---
 
-
-
-## 10. Visualization
-
-### FiftyOne visualization
-
-```bash
-python tools/visualization/fiftyone_vis.py \
--c configs/skydet/skydet_3scale.yml \
--r path/to/checkpoint.pth \
--p 5151
-```
-
-This is useful for browsing predictions and analyzing dense small-object detection results interactively.
-
----
-
-## 11. Experimental Configurations
-
-Besides the main SKYDET configs, the repository also includes exploratory configurations for DINOv3-based backbones.
-
-### DINOv3 + ConvNeXt
-
-```text
-configs/dinov3_convnext_with_dfine/
-├── not_use_feature_fusion_network_or_adapter/
-│   ├── convnext_base_dfine.yml
-│   ├── convnext_large_dfine.yml
-│   ├── convnext_small_dfine.yml
-│   └── convnext_tiny_dfine.yml
-└── use_feature_fusion_network_or_adapter/
-    ├── convnext_base_dfine.yml
-    ├── convnext_large_dfine.yml
-    ├── convnext_small_dfine.yml
-    └── convnext_tiny_dfine.yml
-```
-
-### DINOv3 + ViT
-
-```text
-configs/dinov3_vits_with_dfine/
-├── not_use_feature_fusion_network_or_adapter/
-│   ├── vit7b_lvd_dfine.yml
-│   ├── vit7b_sat_dfine.yml
-│   ├── vitb16_lvd_dfine.yml
-│   ├── vith16plus_lvd_dfine.yml
-│   ├── vitl16_lvd_dfine.yml
-│   ├── vitl16_sat_dfine.yml
-│   ├── vits16_lvd_dfine.yml
-│   └── vits16plus_lvd_dfine.yml
-└── use_feature_fusion_network_or_adapter/
-    └── fea/
-        ├── vit7b_lvd_dfine.yml
-        ├── vit7b_sat_dfine.yml
-        ├── vitb16_lvd_dfine.yml
-        ├── vith16plus_lvd_dfine.yml
-        ├── vitl16_lvd_dfine.yml
-        ├── vitl16_sat_dfine.yml
-        ├── vits16_lvd_dfine.yml
-        └── vits16plus_lvd_dfine.yml
-```
-
-These configs are useful for ablation studies, backbone transfer experiments, and reproducing different design choices in the paper.
-
----
-
-## 12. Citation
+## 8. Citation
 ```
 @ARTICLE{11623293,
   author={Zhang, Yao and Guo, Wei and Xie, Boxiang and Lin, Lingfeng and Zhang, Jie and Yang, Hongwei and Meng, Yuke and Liu, Yi and Zhang, Wei},
@@ -368,7 +175,7 @@ These configs are useful for ablation studies, backbone transfer experiments, an
   doi={10.1109/TGRS.2026.3716766}}
 ```
 
-## 13. Acknowledgement
+## 9. Acknowledgement
 
 This repository is built upon several excellent open-source projects in the DETR family. We sincerely thank the authors of:
 
