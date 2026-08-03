@@ -138,20 +138,10 @@ train.py -c configs/skydet/skydet_3scale.yml --use-amp --seed 0
 
 ## 6. Evaluation
 
-### Single-GPU evaluation
 
 ```bash
 python train.py -c configs/skydet/skydet_3scale.yml --test-only -r path/to/checkpoint.pth
 ```
-
-### Multi-GPU evaluation
-
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --master_port=7777 --nproc_per_node=4 \
-train.py -c configs/skydet/skydet_3scale.yml --test-only -r path/to/checkpoint.pth
-```
-
----
 
 ## 7. Inference
 
