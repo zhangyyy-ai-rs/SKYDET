@@ -78,10 +78,8 @@ SKYDET/
 This repository provides dataset configs for:
 
 - DOTA-v1.0
-- DOTA-v2.0
-- AI-TOD
 - NWPU VHR-10
-- DIOR
+- AI-TOD
 - Custom dataset
 
 The default custom config uses the following structure:
