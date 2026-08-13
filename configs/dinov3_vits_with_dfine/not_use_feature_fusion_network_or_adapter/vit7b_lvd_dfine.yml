@@ -1,9 +1,9 @@
 __include__: [
-  '../dataset/custom_detection.yml',
-  '../runtime.yml',
-  '../base/dataloader.yml',
-  '../base/optimizer.yml',
-  '../base/skydet.yml',
+  '../../dataset/custom_detection.yml',
+  '../../runtime.yml',
+  '../../base/dataloader.yml',
+  '../../base/optimizer.yml',
+  '../../base/skydet.yml',
 ]
 
 output_dir: ./outputs/vit7b_lvd_dfine

@@ -1,4 +1,6 @@
 import math
+from pathlib import Path
+from typing import List
 
 import torch
 import torch.nn as nn
@@ -8,7 +10,6 @@ from einops import rearrange, reduce
 
 from functools import partial
 from ..core import register
-from .dinov3_vision_transformer import *
 
 
 __all__ = ['DINOv3SGAs']
@@ -98,21 +99,29 @@ class DINOv3SGAs(nn.Module):
         self.interaction_indexes = interaction_indexes
         self.patch_size = patch_size
 
-        vit_constructors = {
-            'dinov3_small': vit_small,
-            'dinov3_base': vit_base,
-            'dinov3_large': vit_large,
-            'dinov3_huge': vit_huge2,
-            'dinov3_7b': vit_7b
+        hub_names = {
+            'dinov3_small': 'dinov3_vits16',
+            'dinov3_base': 'dinov3_vitb16',
+            'dinov3_large': 'dinov3_vitl16',
+            'dinov3_huge': 'dinov3_vith16plus',
+            'dinov3_7b': 'dinov3_vit7b16',
         }
-        
-        model_size_key = name.replace('dinov3_', '')
-        
-        if name not in vit_constructors:
+        if name not in hub_names:
             raise NotImplementedError(f"Model name '{name}' is not supported.")
-        vit_builder = vit_constructors[name]
-        print(f"Building DinoVisionTransformer with '{name}' configuration...")
-        self.backbone = vit_builder(patch_size=self.patch_size, pretrained=weights_path)
+        hub_name = hub_names[name]
+        checkpoint_name = Path(weights_path).name.lower() if weights_path else ''
+        if name == 'dinov3_small' and 'vits16plus' in checkpoint_name:
+            hub_name = 'dinov3_vits16plus'
+
+        hub_dir = Path(__file__).resolve().parents[1] / 'dinov3'
+        print(f"Building official DINOv3 backbone with '{hub_name}' configuration...")
+        self.backbone = torch.hub.load(
+            str(hub_dir),
+            hub_name,
+            source='local',
+            pretrained=weights_path is not None,
+            weights=weights_path,
+        )
         
         self.embed_dim = self.backbone.embed_dim
 
@@ -179,4 +188,3 @@ class DINOv3SGAs(nn.Module):
             outputs.append(output)
             
         return tuple(outputs)
-

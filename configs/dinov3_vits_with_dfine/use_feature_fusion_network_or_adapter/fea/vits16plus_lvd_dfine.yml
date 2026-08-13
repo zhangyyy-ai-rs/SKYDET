@@ -1,9 +1,9 @@
 __include__: [
-  '../dataset/custom_detection.yml',
-  '../runtime.yml',
-  '../base/dataloader.yml',
-  '../base/optimizer.yml',
-  '../base/skydet.yml',
+  '../../../dataset/custom_detection.yml',
+  '../../../runtime.yml',
+  '../../../base/dataloader.yml',
+  '../../../base/optimizer.yml',
+  '../../../base/skydet.yml',
 ]
 
 output_dir: ./outputs/vits16plus_lvd_dfine
@@ -12,12 +12,12 @@ SKYDET:
   backbone: DINOv3SGAs
 
 DINOv3SGAs:
-  name: dinov3_small
-  weights_path: dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth
-  interaction_indexes: [5, 8, 11]
-  finetune: False
-  conv_inplane: 32
-  hidden_dim: 224
+  name: dinov3_small
+  weights_path: dinov3_vits16plus_pretrain_lvd1689m-4057cbaa.pth
+  interaction_indexes: [5, 8, 11]
+  finetune: False
+  conv_inplane: 32
+  hidden_dim: 224
 
 
 HybridEncoder:
