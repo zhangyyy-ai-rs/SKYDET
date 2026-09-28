@@ -1,28 +1,45 @@
-<h2 align="center">
-  SKYDET: An End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Objects in Remote Sensing Images
-</h2>
+<h1 align="center">
+  🛰️ SKYDET: An End-to-End Multi-Scale Attentive Detection Network<br>
+  from Foundation Models for Small Objects<br>
+  in Remote Sensing Images
+</h1>
 
 <p align="center">
-  <a href="./LICENSE">
-    <img alt="license" src="https://img.shields.io/badge/LICENSE-Apache%202.0-blue">
-  </a>
+  <strong><em>
+    Yao Zhang, Wei Guo, Boxiang Xie, Lingfeng Lin, Jie Zhang,<br>
+    Hongwei Yang, Yuke Meng, Yi Liu, Wei Zhang
+  </em></strong>
 </p>
 
 <p align="center">
+  <a href="https://ieeexplore.ieee.org/document/11623293"><img src="https://img.shields.io/badge/Paper-IEEE%20TGRS-00629B?style=flat-square" alt="Paper · IEEE TGRS"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-2da44e?style=flat-square" alt="License · MIT"></a>
+</p>
+
+<p align="justify">
   SKYDET is an end-to-end remote sensing object detector for dense small-object detection in complex aerial scenes.
   It is built on DETR-style detection and explores how DINOv3 foundation representations can be transferred to remote sensing imagery through dedicated multi-scale adaptation and cross-scale fusion modules.
 </p>
 
+<p align="center">
+  <a href="figure/framework.png"><img src="figure/framework.png" alt="Overall architecture of SKYDET: DINOv3 backbone, cross-fused encoder, and decoder with self-distillation" width="100%"></a>
+</p>
+
 ---
 
-## News
+<a id="news"></a>
 
+## 📰 News
+
+- **[2026.09]** We have updated the README with clearer formatting and an architecture overview to make SKYDET easier to understand and use.
 - **[2026.07]** Our paper has been accepted by TGRS!
 - **[2026.01]** Initial release of SKYDET code.
 
 ---
 
-## 1. Installation
+<a id="installation"></a>
+
+## <img src="figure/icons/environment.png" width="32" height="32" align="absmiddle" alt=""> 1. Installation
 
 ### Environment
 
@@ -41,7 +58,9 @@ pip install -r requirements.txt
 ```
 ---
 
-## 2. Repository Structure
+<a id="repository-structure"></a>
+
+## 🗂️ 2. Repository Structure
 
 ```text
 SKYDET/
@@ -73,7 +92,9 @@ SKYDET/
 └── train.py
 ```
 
-## 3. Data Preparation
+<a id="data-preparation"></a>
+
+## <img src="figure/icons/data.png" width="32" height="32" align="absmiddle" alt=""> 3. Data Preparation
 
 This repository provides dataset configs for:
 
@@ -95,7 +116,9 @@ dataset/
 ```
 ---
 
-## 4. Pretrained Weights
+<a id="pretrained-weights"></a>
+
+## <img src="figure/icons/backbone.png" width="32" height="32" align="absmiddle" alt=""> 4. Pretrained Weights
 
 SKYDET relies on DINOv3-based pretrained backbones.
 
@@ -118,7 +141,9 @@ Please download the required pretrained weights and modify the corresponding pat
 
 ---
 
-## 5. Training
+<a id="training"></a>
+
+## 🚀 5. Training
 
 ### Single-GPU training
 
@@ -134,14 +159,18 @@ train.py -c configs/skydet/skydet_3scale.yml --use-amp --seed 0
 ```
 
 
-## 6. Evaluation
+<a id="evaluation"></a>
+
+## <img src="figure/icons/evaluation.png" width="32" height="32" align="absmiddle" alt=""> 6. Evaluation
 
 
 ```bash
 python train.py -c configs/skydet/skydet_3scale.yml --test-only -r path/to/checkpoint.pth
 ```
 
-## 7. Inference
+<a id="inference"></a>
+
+## <img src="figure/icons/evaluation.png" width="32" height="32" align="absmiddle" alt=""> 7. Inference
 
 Visualized PyTorch inference
 
@@ -154,7 +183,10 @@ python tools/inference/torch_inf_vis.py \
 
 ---
 
-## 8. Citation
+<a id="citation"></a>
+
+## 📖 8. Citation
+
 ```
 @article{zhang2026skydet,
   title={SKYDET: An End-to-End Multi-Scale Attentive Detection Network from Foundation Models for Small Objects in Remote Sensing Images},
@@ -165,7 +197,9 @@ python tools/inference/torch_inf_vis.py \
 }
 ```
 
-## 9. Acknowledgement
+<a id="acknowledgement"></a>
+
+## <img src="figure/icons/acknowledgements.png" width="32" height="32" align="absmiddle" alt=""> 9. Acknowledgement
 
 This repository is built upon several excellent open-source projects in the DETR family. We sincerely thank the authors of:
 
